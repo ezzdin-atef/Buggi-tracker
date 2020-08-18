@@ -15,7 +15,7 @@ import "./styles.css";
 
 class App extends Component {
   state = {
-    id: localStorage.getItem("id")
+    id: localStorage.getItem("id"),
   };
   update = () => {
     this.setState({ id: localStorage.getItem("id") });
@@ -26,7 +26,8 @@ class App extends Component {
         <Switch>
           <Route
             path="/login"
-            render={props => {
+            exact
+            render={(props) => {
               if (!this.state.id)
                 return <Login {...props} update={this.update} />;
               else return <Redirect to="/" />;
@@ -35,7 +36,7 @@ class App extends Component {
           <Route
             path="/users/new"
             exact
-            render={props => {
+            render={(props) => {
               if (this.state.id) return <NewUser {...props} />;
               else return <Redirect to="/login" />;
             }}
@@ -43,7 +44,7 @@ class App extends Component {
           <Route
             path="/users/:id"
             exact
-            render={props => {
+            render={(props) => {
               if (this.state.id) return <Edit {...props} />;
               else return <Redirect to="/login" />;
             }}
@@ -51,7 +52,7 @@ class App extends Component {
           <Route
             path="/users"
             exact
-            render={props => {
+            render={(props) => {
               if (this.state.id) return <Users {...props} />;
               else return <Redirect to="/login" />;
             }}
@@ -59,7 +60,7 @@ class App extends Component {
           <Route
             path="/projects/:id/issues/new"
             exact
-            render={props => {
+            render={(props) => {
               if (this.state.id) return <AddIssues {...props} />;
               else return <Redirect to="/login" />;
             }}
@@ -67,7 +68,7 @@ class App extends Component {
           <Route
             path="/projects/:id/issues/:num"
             exact
-            render={props => {
+            render={(props) => {
               if (this.state.id) return <OpenIssue {...props} />;
               else return <Redirect to="/login" />;
             }}
@@ -76,7 +77,7 @@ class App extends Component {
           <Route
             path="/projects/:id/issues"
             exact
-            render={props => {
+            render={(props) => {
               if (this.state.id) return <Issues {...props} />;
               else return <Redirect to="/login" />;
             }}
@@ -84,7 +85,7 @@ class App extends Component {
           <Route
             path="/projects/new"
             exact
-            render={props => {
+            render={(props) => {
               if (this.state.id) return <NewProject {...props} />;
               else return <Redirect to="/login" />;
             }}
@@ -92,7 +93,7 @@ class App extends Component {
           <Route
             path="/projects/:id"
             exact
-            render={props => {
+            render={(props) => {
               if (this.state.id) return <EditProject {...props} />;
               else return <Redirect to="/login" />;
             }}
@@ -100,7 +101,7 @@ class App extends Component {
           <Route
             path="/projects"
             exact
-            render={props => {
+            render={(props) => {
               if (this.state.id) return <Projects {...props} />;
               else return <Redirect to="/login" />;
             }}
@@ -108,7 +109,7 @@ class App extends Component {
           <Route
             path="/"
             exact
-            render={props => {
+            render={(props) => {
               if (this.state.id)
                 return <Logged {...props} update={this.update} />;
               else return <Redirect to="/login" />;
