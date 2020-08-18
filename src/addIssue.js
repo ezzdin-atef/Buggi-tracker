@@ -18,7 +18,8 @@ class AddIssues extends Component {
 
   async componentDidMount() {
     let { data } = await axios.get(
-      "https://mnqs7.sse.codesandbox.io/projects/" + this.props.match.params.id
+      "https://buggie-tracker-api.herokuapp.com/projects/" +
+        this.props.match.params.id
     );
     // const data = Object.keys(d).sort(function(a, b) {
     //   return a.username - b.username;
@@ -35,7 +36,7 @@ class AddIssues extends Component {
     //   a["name"].toLowerCase() > b["name"].toLowerCase() ? 1 : -1
     // );
     // const { data: user } = await axios.get(
-    //   "https://mnqs7.sse.codesandbox.io/users/" + localStorage.getItem("id")
+    //   "https://buggie-tracker-api.herokuapp.com/users/" + localStorage.getItem("id")
     // );
     // console.log(data.issues);
     this.setState({ name: data.name });
@@ -45,10 +46,10 @@ class AddIssues extends Component {
   //   e.preventDefault();
   //   this.setState({ data: [] });
   //   await axios.delete(
-  //     "https://mnqs7.sse.codesandbox.io/projects/" + this.state.delete
+  //     "https://buggie-tracker-api.herokuapp.com/projects/" + this.state.delete
   //   );
   //   const { data } = await axios.get(
-  //     "https://mnqs7.sse.codesandbox.io/projects"
+  //     "https://buggie-tracker-api.herokuapp.com/projects"
   //   );
   //   // const data = Object.keys(d).sort(function(a, b) {
   //   //   return a.username - b.username;
@@ -85,7 +86,7 @@ class AddIssues extends Component {
     }
   };
 
-  onSubmit = async e => {
+  onSubmit = async (e) => {
     e.preventDefault();
     const title = this.state.title;
     let title_error = "";
@@ -103,7 +104,7 @@ class AddIssues extends Component {
     if (title_error === "" && description_error === "") {
       axios
         .patch(
-          "https://mnqs7.sse.codesandbox.io/projects/issue/" +
+          "https://buggie-tracker-api.herokuapp.com/projects/issue/" +
             this.props.match.params.id,
           {
             issue: {
@@ -161,7 +162,7 @@ class AddIssues extends Component {
                 id="title"
                 name="title"
                 type="text"
-                onChange={e => this.onChange(e, "title")}
+                onChange={(e) => this.onChange(e, "title")}
               />
               {this.state.title_error !== "" && (
                 <div data-test="error" className="error">
@@ -174,7 +175,7 @@ class AddIssues extends Component {
               <textarea
                 id="description"
                 name="description"
-                onChange={e => this.onChange(e, "description")}
+                onChange={(e) => this.onChange(e, "description")}
               />
               {this.state.description_error !== "" && (
                 <div data-test="error" className="error">

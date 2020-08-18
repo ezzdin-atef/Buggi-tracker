@@ -14,7 +14,9 @@ class NewUser extends Component {
   };
 
   async componentDidMount() {
-    const { data } = await axios.get("https://mnqs7.sse.codesandbox.io/users");
+    const { data } = await axios.get(
+      "https://buggie-tracker-api.herokuapp.com/users"
+    );
     // const data = Object.keys(d).sort(function(a, b) {
     //   return a.username - b.username;
     // });
@@ -52,7 +54,7 @@ class NewUser extends Component {
     }
   };
 
-  onSubmit = async e => {
+  onSubmit = async (e) => {
     e.preventDefault();
     const user = {
       username: this.state.username,
@@ -84,8 +86,8 @@ class NewUser extends Component {
     }
     if (username_error === "" && role_error === "") {
       axios
-        .post("https://mnqs7.sse.codesandbox.io/users", user)
-        .then(res => {
+        .post("https://buggie-tracker-api.herokuapp.com/users", user)
+        .then((res) => {
           const data = JSON.parse(localStorage.getItem("data"));
           data.push(res.data);
           data.sort((a, b) =>
@@ -93,7 +95,7 @@ class NewUser extends Component {
           );
           this.props.history.push("/users");
         })
-        .catch(err => {
+        .catch((err) => {
           username_error = "Username is already taken";
           this.setState({ username_error });
         });
@@ -129,7 +131,7 @@ class NewUser extends Component {
                   id="username"
                   name="username"
                   type="text"
-                  onChange={e => this.onChange(e, "username")}
+                  onChange={(e) => this.onChange(e, "username")}
                 />
                 {this.state.username_error !== "" && (
                   <div data-test="error" className="error">
@@ -142,7 +144,7 @@ class NewUser extends Component {
                 <select
                   id="role"
                   name="role"
-                  onChange={e => this.onChange(e, "role")}
+                  onChange={(e) => this.onChange(e, "role")}
                 >
                   <option disabled="" value="" defaultValue>
                     select

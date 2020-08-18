@@ -14,7 +14,8 @@ class Issues extends Component {
 
   async componentDidMount() {
     let { data } = await axios.get(
-      "https://mnqs7.sse.codesandbox.io/projects/" + this.props.match.params.id
+      "https://buggie-tracker-api.herokuapp.com/projects/" +
+        this.props.match.params.id
     );
     // const data = Object.keys(d).sort(function(a, b) {
     //   return a.username - b.username;
@@ -33,7 +34,7 @@ class Issues extends Component {
     //   a["name"].toLowerCase() > b["name"].toLowerCase() ? 1 : -1
     // );
     // const { data: user } = await axios.get(
-    //   "https://mnqs7.sse.codesandbox.io/users/" + localStorage.getItem("id")
+    //   "https://buggie-tracker-api.herokuapp.com/users/" + localStorage.getItem("id")
     // );
 
     // const reverse = [];
@@ -48,10 +49,10 @@ class Issues extends Component {
   //   e.preventDefault();
   //   this.setState({ data: [] });
   //   await axios.delete(
-  //     "https://mnqs7.sse.codesandbox.io/projects/" + this.state.delete
+  //     "https://buggie-tracker-api.herokuapp.com/projects/" + this.state.delete
   //   );
   //   const { data } = await axios.get(
-  //     "https://mnqs7.sse.codesandbox.io/projects"
+  //     "https://buggie-tracker-api.herokuapp.com/projects"
   //   );
   //   // const data = Object.keys(d).sort(function(a, b) {
   //   //   return a.username - b.username;

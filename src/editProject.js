@@ -19,9 +19,12 @@ class EditProject extends Component {
   };
 
   async componentDidMount() {
-    const { data } = await axios.get("https://mnqs7.sse.codesandbox.io/users");
+    const { data } = await axios.get(
+      "https://buggie-tracker-api.herokuapp.com/users"
+    );
     const { data: project } = await axios.get(
-      "https://mnqs7.sse.codesandbox.io/projects/" + this.props.match.params.id
+      "https://buggie-tracker-api.herokuapp.com/projects/" +
+        this.props.match.params.id
     );
     // const data = Object.keys(d).sort(function(a, b) {
     //   return a.username - b.username;
@@ -68,7 +71,7 @@ class EditProject extends Component {
     }
   };
 
-  onAddMember = e => {
+  onAddMember = (e) => {
     e.preventDefault();
     if (this.state.member !== "") {
       const members = [...this.state.members];
@@ -83,11 +86,11 @@ class EditProject extends Component {
   onRemoveMember = (e, val) => {
     e.preventDefault();
     let members = [...this.state.members];
-    members = members.filter(el => el !== val);
+    members = members.filter((el) => el !== val);
     this.setState({ members });
   };
 
-  onSubmit = async e => {
+  onSubmit = async (e) => {
     e.preventDefault();
     if (this.state.name !== "" && this.state.owner !== "") {
       const project = {
@@ -97,7 +100,7 @@ class EditProject extends Component {
       };
 
       const { data } = await axios.put(
-        "https://mnqs7.sse.codesandbox.io/projects/" +
+        "https://buggie-tracker-api.herokuapp.com/projects/" +
           this.props.match.params.id,
         project
       );
@@ -154,7 +157,7 @@ class EditProject extends Component {
                   name="name"
                   type="text"
                   value={name}
-                  onChange={e => this.onChange(e, "name")}
+                  onChange={(e) => this.onChange(e, "name")}
                 />
                 {name_error !== "" && (
                   <div data-test="error" className="error">
@@ -167,7 +170,7 @@ class EditProject extends Component {
                 <select
                   id="owner"
                   name="owner"
-                  onChange={e => this.onChange(e, "owner")}
+                  onChange={(e) => this.onChange(e, "owner")}
                   disabled={this.state.role === "owner" && "disabled"}
                 >
                   <option
@@ -178,8 +181,8 @@ class EditProject extends Component {
                     select
                   </option>
                   {data
-                    .filter(el => el.role === "owner")
-                    .map(el => (
+                    .filter((el) => el.role === "owner")
+                    .map((el) => (
                       <option
                         value={el.username}
                         selected={owner === el.username && "selected"}
@@ -206,7 +209,7 @@ class EditProject extends Component {
                         data-test-dir="left"
                         href="?"
                         title="delete"
-                        onClick={e => this.onRemoveMember(e, el)}
+                        onClick={(e) => this.onRemoveMember(e, el)}
                       >
                         ✕
                       </a>
@@ -223,7 +226,7 @@ class EditProject extends Component {
                     <select
                       id="member"
                       name="member"
-                      onChange={e => this.onChange(e, "member")}
+                      onChange={(e) => this.onChange(e, "member")}
                     >
                       <option
                         disabled=""
@@ -234,11 +237,11 @@ class EditProject extends Component {
                       </option>
                       {data
                         .filter(
-                          el =>
+                          (el) =>
                             el.role === "reporter" &&
                             !members.includes(el.username)
                         )
-                        .map(el => (
+                        .map((el) => (
                           <option
                             value={el.username}
                             selected={member === el.username && "selected"}

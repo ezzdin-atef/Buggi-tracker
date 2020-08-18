@@ -18,7 +18,8 @@ class OpenIssue extends Component {
 
   async componentDidMount() {
     let { data } = await axios.get(
-      "https://mnqs7.sse.codesandbox.io/projects/" + this.props.match.params.id
+      "https://buggie-tracker-api.herokuapp.com/projects/" +
+        this.props.match.params.id
     );
     // const data = Object.keys(d).sort(function(a, b) {
     //   return a.username - b.username;
@@ -35,7 +36,7 @@ class OpenIssue extends Component {
     //   a["name"].toLowerCase() > b["name"].toLowerCase() ? 1 : -1
     // );
     // const { data: user } = await axios.get(
-    //   "https://mnqs7.sse.codesandbox.io/users/" + localStorage.getItem("id")
+    //   "https://buggie-tracker-api.herokuapp.com/users/" + localStorage.getItem("id")
     // );
     console.log(data.issues[this.props.match.params.num - 1]);
     this.setState({
@@ -48,10 +49,10 @@ class OpenIssue extends Component {
   //   e.preventDefault();
   //   this.setState({ data: [] });
   //   await axios.delete(
-  //     "https://mnqs7.sse.codesandbox.io/projects/" + this.state.delete
+  //     "https://buggie-tracker-api.herokuapp.com/projects/" + this.state.delete
   //   );
   //   const { data } = await axios.get(
-  //     "https://mnqs7.sse.codesandbox.io/projects"
+  //     "https://buggie-tracker-api.herokuapp.com/projects"
   //   );
   //   // const data = Object.keys(d).sort(function(a, b) {
   //   //   return a.username - b.username;
@@ -104,7 +105,7 @@ class OpenIssue extends Component {
   //   if (this.state.title_error === "" && this.state.description_error === "") {
   //     axios
   //       .patch(
-  //         "https://mnqs7.sse.codesandbox.io/projects/issue/" +
+  //         "https://buggie-tracker-api.herokuapp.com/projects/issue/" +
   //           this.props.match.params.id,
   //         {
   //           issue: {

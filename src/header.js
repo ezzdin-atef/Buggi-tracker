@@ -8,7 +8,8 @@ class Header extends Component {
   };
   async componentDidMount() {
     const { data } = await axios.get(
-      "https://mnqs7.sse.codesandbox.io/users/" + localStorage.getItem("id")
+      "https://buggie-tracker-api.herokuapp.com/users/" +
+        localStorage.getItem("id")
     );
     // console.log(data);
     this.setState({ data });
@@ -27,7 +28,7 @@ class Header extends Component {
         <button
           data-test="logout-btn"
           className="btn btn-primary"
-          onClick={e => {
+          onClick={(e) => {
             localStorage.removeItem("id");
             window.location.reload(false);
           }}

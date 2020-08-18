@@ -15,7 +15,9 @@ class Users extends Component {
   };
 
   async componentDidMount() {
-    const { data } = await axios.get("https://mnqs7.sse.codesandbox.io/users");
+    const { data } = await axios.get(
+      "https://buggie-tracker-api.herokuapp.com/users"
+    );
     // const data = Object.keys(d).sort(function(a, b) {
     //   return a.username - b.username;
     // });
@@ -28,7 +30,8 @@ class Users extends Component {
     localStorage.setItem("data", JSON.stringify(data));
     this.setState({ data });
     const { data: user } = await axios.get(
-      "https://mnqs7.sse.codesandbox.io/users/" + localStorage.getItem("id")
+      "https://buggie-tracker-api.herokuapp.com/users/" +
+        localStorage.getItem("id")
     );
     this.setState({ logged: user.username, role: user.role });
   }
@@ -36,9 +39,11 @@ class Users extends Component {
   onDelete = async () => {
     this.setState({ data: [] });
     await axios.delete(
-      "https://mnqs7.sse.codesandbox.io/users/" + this.state.delete
+      "https://buggie-tracker-api.herokuapp.com/users/" + this.state.delete
     );
-    const { data } = await axios.get("https://mnqs7.sse.codesandbox.io/users");
+    const { data } = await axios.get(
+      "https://buggie-tracker-api.herokuapp.com/users"
+    );
     // const data = Object.keys(d).sort(function(a, b) {
     //   return a.username - b.username;
     // });
@@ -133,7 +138,7 @@ class Users extends Component {
                           href="?"
                           data-test={`delete-btn-${ind + 1}`}
                           data-test-dir="left"
-                          onClick={e => {
+                          onClick={(e) => {
                             e.preventDefault();
                             this.setState({
                               model: true,

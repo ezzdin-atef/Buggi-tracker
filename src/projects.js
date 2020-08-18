@@ -15,7 +15,9 @@ class Projects extends Component {
   };
 
   async componentDidMount() {
-    let { data } = await axios.get("https://mnqs7.sse.codesandbox.io/projects");
+    let { data } = await axios.get(
+      "https://buggie-tracker-api.herokuapp.com/projects"
+    );
     // const data = Object.keys(d).sort(function(a, b) {
     //   return a.username - b.username;
     // });
@@ -25,28 +27,28 @@ class Projects extends Component {
 
     console.log(data);
     if (this.state.role === "owner") {
-      data = data.filter(el => el.owner === this.state.username);
+      data = data.filter((el) => el.owner === this.state.username);
     } else if (this.state.role === "reporter") {
-      data = data.filter(el => el.members.includes(this.state.username));
+      data = data.filter((el) => el.members.includes(this.state.username));
     }
 
     data.sort((a, b) =>
       a["name"].toLowerCase() > b["name"].toLowerCase() ? 1 : -1
     );
     // const { data: user } = await axios.get(
-    //   "https://mnqs7.sse.codesandbox.io/users/" + localStorage.getItem("id")
+    //   "https://buggie-tracker-api.herokuapp.com/users/" + localStorage.getItem("id")
     // );
     this.setState({ data });
   }
 
-  onDelete = async e => {
+  onDelete = async (e) => {
     e.preventDefault();
     this.setState({ data: [] });
     await axios.delete(
-      "https://mnqs7.sse.codesandbox.io/projects/" + this.state.delete
+      "https://buggie-tracker-api.herokuapp.com/projects/" + this.state.delete
     );
     const { data } = await axios.get(
-      "https://mnqs7.sse.codesandbox.io/projects"
+      "https://buggie-tracker-api.herokuapp.com/projects"
     );
     // const data = Object.keys(d).sort(function(a, b) {
     //   return a.username - b.username;
@@ -76,14 +78,14 @@ class Projects extends Component {
                   <button
                     data-test="yes-btn"
                     className="btn btn-primary"
-                    onClick={e => this.onDelete(e)}
+                    onClick={(e) => this.onDelete(e)}
                   >
                     Yes
                   </button>
                   <button
                     data-test="no-btn"
                     className="btn btn-primary"
-                    onClick={e => {
+                    onClick={(e) => {
                       e.preventDefault();
                       this.setState({
                         model: false,
@@ -155,7 +157,7 @@ class Projects extends Component {
                           href="?"
                           data-test={`delete-btn-${ind + 1}`}
                           data-test-dir="left"
-                          onClick={e => {
+                          onClick={(e) => {
                             e.preventDefault();
                             this.setState({
                               model: true,

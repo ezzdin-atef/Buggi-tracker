@@ -15,7 +15,7 @@ class Login extends Component {
   };
 
   // async componentDidMount() {
-  //   const { data } = await axios.get("https://mnqs7.sse.codesandbox.io/users");
+  //   const { data } = await axios.get("https://buggie-tracker-api.herokuapp.com/users");
   //   console.log(data);
   //   this.setState({ data });
   // }
@@ -47,7 +47,7 @@ class Login extends Component {
     }
   };
 
-  onsubmit = async e => {
+  onsubmit = async (e) => {
     e.preventDefault();
     const credination = {
       username: this.state.username,
@@ -64,10 +64,9 @@ class Login extends Component {
 
     let id = "";
     const { data } = await axios.post(
-      "https://mnqs7.sse.codesandbox.io/users/login",
+      "https://buggie-tracker-api.herokuapp.com/users/login",
       credination
     );
-
     if (data.username) {
       id = data._id;
     }
@@ -108,7 +107,7 @@ class Login extends Component {
               id="username"
               name="username"
               type="text"
-              onChange={e => this.onChange("username", e)}
+              onChange={(e) => this.onChange("username", e)}
             />
             {this.state.errors.username !== "" && (
               <div data-test="error" className="error">
@@ -122,7 +121,7 @@ class Login extends Component {
               id="password"
               name="password"
               type="password"
-              onChange={e => this.onChange("password", e)}
+              onChange={(e) => this.onChange("password", e)}
             />
             {this.state.errors.password !== "" && (
               <div data-test="error" className="error">

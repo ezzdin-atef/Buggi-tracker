@@ -12,7 +12,8 @@ class Logged extends Component {
   };
   async componentDidMount() {
     const { data } = await axios.get(
-      "https://mnqs7.sse.codesandbox.io/users/" + localStorage.getItem("id")
+      "https://buggie-tracker-api.herokuapp.com/users/" +
+        localStorage.getItem("id")
     );
     // console.log(data);
     localStorage.setItem("role", data.role);

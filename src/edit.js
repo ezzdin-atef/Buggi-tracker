@@ -13,8 +13,10 @@ class Edit extends Component {
     role_error: ""
   };
   async componentDidMount() {
-    const { data } = await axios.get("https://mnqs7.sse.codesandbox.io/users");
-    const user = data.find(el => el._id === this.props.match.params.id);
+    const { data } = await axios.get(
+      "https://buggie-tracker-api.herokuapp.com/users"
+    );
+    const user = data.find((el) => el._id === this.props.match.params.id);
     this.setState({ username: user.username, role: user.role, data });
   }
   onChange = (e, type) => {
@@ -47,7 +49,7 @@ class Edit extends Component {
       this.setState({ role });
     }
   };
-  onSubmit = async e => {
+  onSubmit = async (e) => {
     e.preventDefault();
     const user = {
       username: this.state.username,
@@ -56,14 +58,14 @@ class Edit extends Component {
     if (this.state.username_error === "" && this.state.role_error === "") {
       axios
         .put(
-          "https://mnqs7.sse.codesandbox.io/users/" +
+          "https://buggie-tracker-api.herokuapp.com/users/" +
             this.props.match.params.id,
           user
         )
         .then(() => {
           this.props.history.push("/users");
         })
-        .catch(err => {
+        .catch((err) => {
           const username_error = "Username is already taken";
           this.setState({ username_error });
         });
@@ -100,7 +102,7 @@ class Edit extends Component {
                   name="username"
                   type="text"
                   value={this.state.username}
-                  onChange={e => this.onChange(e, "username")}
+                  onChange={(e) => this.onChange(e, "username")}
                 />
                 {this.state.username_error !== "" && (
                   <div data-test="error" className="error">
@@ -113,7 +115,7 @@ class Edit extends Component {
                 <select
                   id="role"
                   name="role"
-                  onChange={e => this.onChange(e, "role")}
+                  onChange={(e) => this.onChange(e, "role")}
                 >
                   <option disabled="" value="">
                     select
